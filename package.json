@@ -1,0 +1,29 @@
+{
+  "name": "lesshint-reporter-teamcity",
+  "version": "1.0.0",
+  "description": "TeamCity reporter for lesshint.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lesshint/reporter-teamcity"
+  },
+  "keywords": [
+    "reporter",
+    "lesshint",
+    "teamcity"
+  ],
+  "scripts": {
+    "pretest": "eslint *.js",
+    "test": "mocha"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lesshint/reporter-teamcity/issues"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "rewire": "^2.5.1",
+    "sinon": "^1.17.3"
+  }
+}
