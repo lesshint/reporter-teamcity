@@ -9,12 +9,14 @@ module.exports = {
         console.log('##teamcity[testSuiteStarted name=\'lesshint\']');
 
         errors.forEach(function (err) {
-            if (lastFile !== err.fullPath) {
+            var errFile = err.fullPath.replace('./', '');
+
+            if (lastFile !== errFile) {
                 if (lastFile) {
                     console.log(util.format('##teamcity[testFinished name=\'%s\']', lastFile));
                 }
 
-                lastFile = err.fullPath;
+                lastFile = errFile;
                 console.log(util.format('##teamcity[testStarted name=\'%s\']', lastFile));
             }
 
