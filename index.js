@@ -28,7 +28,7 @@ module.exports = {
                     err.column,
                     err.severity === 'error' ? 'Error' : 'Warning',
                     err.linter,
-                    err.message
+                    err.message.replace('\'', '|\'')
                 )
             );
         });

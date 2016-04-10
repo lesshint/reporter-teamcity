@@ -1,6 +1,6 @@
 {
   "name": "lesshint-reporter-teamcity",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "TeamCity reporter for lesshint.",
   "main": "index.js",
   "repository": {
