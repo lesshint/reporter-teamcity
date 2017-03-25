@@ -1,15 +1,15 @@
 'use strict';
 
-var util = require('util');
+const util = require('util');
 
 module.exports = {
-    report: function (errors) {
-        var lastFile = '';
+    report: function report (results) {
+        let lastFile = '';
 
         console.log('##teamcity[testSuiteStarted name=\'lesshint\']');
 
-        errors.forEach(function (err) {
-            var errFile = err.fullPath.replace('./', '');
+        results.forEach((result) => {
+            const errFile = result.fullPath.replace(process.env.PWD + '/', '');
 
             if (lastFile !== errFile) {
                 if (lastFile) {
@@ -24,16 +24,16 @@ module.exports = {
                 util.format(
                     '##teamcity[testFailed name=\'%s\' message=\'line %d, col %d, %s (%s) %s\']',
                     lastFile,
-                    err.line,
-                    err.column,
-                    err.severity === 'error' ? 'Error' : 'Warning',
-                    err.linter,
-                    err.message.replace('\'', '|\'')
+                    result.line,
+                    result.column,
+                    result.severity === 'error' ? 'Error' : 'Warning',
+                    result.linter,
+                    result.message.replace('\'', '|\'')
                 )
             );
         });
 
-        if (errors.length) {
+        if (results.length) {
             console.log(util.format('##teamcity[testFinished name=\'%s\']', lastFile));
         } else {
             console.log('##teamcity[testStarted name=\'lesshint\']');

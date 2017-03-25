@@ -1,25 +1,25 @@
 'use strict';
 
-var expect = require('chai').expect;
-var rewire = require('rewire');
-var sinon = require('sinon');
-var util = require('util');
+const proxyquire = require('proxyquire');
+const expect = require('chai').expect;
+const sinon = require('sinon');
+const util = require('util');
 
-describe('reporter:teamcity', function () {
-    var reporter = rewire('./index.js');
+const reporter = proxyquire('./index', {util: util});
 
-    beforeEach(function () {
+describe('reporter:teamcity', () => {
+    beforeEach(() => {
         sinon.stub(process.stdout, 'write');
     });
 
-    afterEach(function () {
+    afterEach(() => {
         if (process.stdout.write.restore) {
             process.stdout.write.restore();
         }
     });
 
-    it('should not print anything when not passed any errors', function () {
-        var errors = [];
+    it('should not print anything when not passed any errors', () => {
+        const errors = [];
 
         sinon.spy(console, 'log');
 
@@ -34,8 +34,8 @@ describe('reporter:teamcity', function () {
         console.log.restore();
     });
 
-    it('print error for 1 file', function () {
-        var errors = [{
+    it('print error for 1 file', () => {
+        const errors = [{
             column: 5,
             file: 'file.less',
             fullPath: 'path/to/file.less',
@@ -62,8 +62,8 @@ describe('reporter:teamcity', function () {
         console.log.restore();
     });
 
-    it('print errors for 2 files', function () {
-        var errors = [{
+    it('print errors for 2 files', () => {
+        const errors = [{
             column: 5,
             file: 'file.less',
             fullPath: 'path/to/file.less',
