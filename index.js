@@ -9,7 +9,7 @@ module.exports = {
         console.log('##teamcity[testSuiteStarted name=\'lesshint\']');
 
         results.forEach((result) => {
-            const errFile = result.fullPath.replace(process.env.PWD + '/', '');
+            const errFile = result.fullPath.replace(process.cwd() + '/', '');
 
             if (lastFile !== errFile) {
                 if (lastFile) {
